@@ -27,6 +27,8 @@ class AdminPanelProvider extends PanelProvider
             ->default()
             ->id('admin')
             ->path('admin')
+            ->authGuard('web')
+            ->brandName('YallaMunch Admin')
             ->login()
             ->colors([
                 'primary' => Color::Amber,
