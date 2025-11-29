@@ -16,11 +16,18 @@ class CategoriesTable
     {
         return $table
             ->columns([
-                TextColumn::make('name.ar')->label('الاسم (AR)'),
-                TextColumn::make('name.en')->label('Name (EN)'),
-                ImageColumn::make('image')->label('Image'),
-                IconColumn::make('status')->boolean()->label('Active'),
-                TextColumn::make('created_at')->dateTime()->label('Created At'),
+                TextColumn::make('name.ar')
+                    ->label('الاسم (AR)'),
+                TextColumn::make('name.en')
+                    ->label('Name (EN)'),
+                ImageColumn::make('image')
+                    ->label('Image'),
+                IconColumn::make('status')
+                    ->boolean()
+                    ->label('Active'),
+                TextColumn::make('created_at')
+                    ->dateTime()
+                    ->label('Created At'),
             ])
             // ->actions([
             //     Tables\Actions\EditAction::make(),

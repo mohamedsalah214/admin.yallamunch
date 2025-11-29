@@ -41,7 +41,7 @@ return [
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
-            'url' => env('APP_URL').'/storage',
+            'url' => env('APP_URL') . '/storage',
             'visibility' => 'public',
             'throw' => false,
             'report' => false,
@@ -60,6 +60,12 @@ return [
             'report' => false,
         ],
 
+        'main_site' => [
+            'driver' => 'local',
+            'root' => '/home/yallyiaj/public_html/storage/app/public',
+            'url' => 'https://yallamunch.com/storage',
+            'visibility' => 'public',
+        ],
     ],
 
     /*
