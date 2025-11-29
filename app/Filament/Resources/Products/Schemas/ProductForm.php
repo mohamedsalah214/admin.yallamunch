@@ -45,6 +45,7 @@ class ProductForm
                 FileUpload::make('image')
                     ->label('Product Image')
                     ->directory('products')
+                    ->disk('main_site')
                     ->image()
                     ->visibility('public')
                     ->maxSize(5048),
