@@ -9,10 +9,6 @@ use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Components\Tabs;
 use Filament\Schemas\Components\Tabs\Tab;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Config;
-use Filament\Forms\Components\Select;
 
 class CategoryForm
 {
@@ -46,31 +42,10 @@ class CategoryForm
                 FileUpload::make('image')
                     ->label('Category Image')
                     ->directory('categories')
-                    ->disk('main_site')            // مهم: يخزن على disk ده
+                    ->disk('main_site')
                     ->image()
                     ->visibility('public')
-                    ->maxSize(5048)
-                    // عندما يعرض حالة موجودة (edit), نحوّل قيمة الحقل إلى URL كامل للعرض
-                    ->getUploadedFileUrlUsing(function (?string $state) {
-                        if (! $state) {
-                            return null;
-                        }
-
-                        // لو المخزون هو URL كامل، رجّعه كما هو
-                        if (Str::startsWith($state, ['http://', 'https://'])) {
-                            return $state;
-                        }
-
-                        // لو المخزون هو المسار النسبي، ارجع URL من ال-disk اللي عرفناه
-                        if (Storage::disk('main_site')->exists($state)) {
-                            return Storage::url('main_site/' . $state);
-                        }
-
-                        // fallback: حاول تبني الـ URL بناءً على config
-                        return Config::get('filesystems.disks.main_site.url') . '/' . ltrim($state, '/');
-                    })
-                    // (اختياري) لو عايز تمنع استبدال الملف لما تعمل edit بلا قصد:
-                    ->preserveFilenames(), // أو بحسب تفضيلك
+                    ->maxSize(5048),
                 Toggle::make('status')
                     ->label('Active')
                     ->default(true),
